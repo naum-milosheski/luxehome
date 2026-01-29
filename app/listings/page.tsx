@@ -6,14 +6,14 @@ import PropertyCard from '@/components/PropertyCard';
 import { getProperties, PropertyFilters } from '@/app/actions/properties';
 import { Property } from '@/types/supabase';
 import { SlidersHorizontal, Search, ChevronDown, X, Filter } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useSearchParams } from 'next/navigation';
 import FadeIn from '@/components/FadeIn';
 import FilterContent from '@/components/FilterContent';
 
-export default function ListingsPage() {
+function ListingsContent() {
     const searchParams = useSearchParams();
     const initialSearch = searchParams.get('search') || '';
 
@@ -478,5 +478,22 @@ export default function ListingsPage() {
                 )}
             </AnimatePresence>
         </main>
+    );
+}
+
+export default function ListingsPage() {
+    return (
+        <Suspense fallback={
+            <main className="min-h-screen bg-brand-bg pb-20">
+                <Navbar />
+                <div className="pt-32 md:pt-48 px-4 max-w-[1600px] mx-auto">
+                    <div className="flex items-center justify-center py-20">
+                        <div className="w-8 h-8 border-4 border-brand-lime border-t-transparent rounded-full animate-spin" />
+                    </div>
+                </div>
+            </main>
+        }>
+            <ListingsContent />
+        </Suspense>
     );
 }
