@@ -18,12 +18,18 @@ function ListingsContent() {
     const initialSearch = searchParams.get('search') || '';
 
     const [isSortOpen, setIsSortOpen] = useState(false);
-    const sortRef = useRef<HTMLDivElement>(null);
+    const sortRefDesktop = useRef<HTMLDivElement>(null);
+    const sortRefMobile = useRef<HTMLDivElement>(null);
+    const sortRefTablet = useRef<HTMLDivElement>(null);
 
     // Close sort dropdown when clicking outside
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            if (sortRef.current && !sortRef.current.contains(event.target as Node)) {
+            const isOutsideDesktop = !sortRefDesktop.current || !sortRefDesktop.current.contains(event.target as Node);
+            const isOutsideMobile = !sortRefMobile.current || !sortRefMobile.current.contains(event.target as Node);
+            const isOutsideTablet = !sortRefTablet.current || !sortRefTablet.current.contains(event.target as Node);
+
+            if (isOutsideDesktop && isOutsideMobile && isOutsideTablet) {
                 setIsSortOpen(false);
             }
         }
@@ -180,6 +186,7 @@ function ListingsContent() {
                                     setFilters={setFilters}
                                     handleFilterChange={handleFilterChange}
                                     toggleAmenity={toggleAmenity}
+                                    isSidebar={true}
                                 />
                             </div>
                         </aside>
@@ -196,7 +203,7 @@ function ListingsContent() {
 
                                 <div className="hidden lg:flex items-center gap-3 relative self-start md:self-auto">
                                     <span className="text-sm text-gray-500 whitespace-nowrap">Sort by:</span>
-                                    <div className="relative w-full md:w-auto" ref={sortRef}>
+                                    <div className="relative w-full md:w-auto" ref={sortRefDesktop}>
                                         <button
                                             onClick={() => setIsSortOpen(!isSortOpen)}
                                             className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-brand-lime transition-colors min-w-[160px] justify-between w-full md:w-auto"
@@ -245,7 +252,7 @@ function ListingsContent() {
                                 {/* Mobile Sort By - Below Filters (Mobile Only) */}
                                 <div className="flex items-center gap-3 relative">
                                     <span className="text-sm text-gray-500 whitespace-nowrap">Sort by:</span>
-                                    <div className="relative w-full" ref={sortRef}>
+                                    <div className="relative w-full" ref={sortRefMobile}>
                                         <button
                                             onClick={() => setIsSortOpen(!isSortOpen)}
                                             className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-brand-lime transition-colors min-w-[160px] justify-between w-full"
@@ -293,7 +300,7 @@ function ListingsContent() {
 
                                 <div className="flex items-center gap-3 relative">
                                     <span className="text-sm text-gray-500 whitespace-nowrap">Sort by:</span>
-                                    <div className="relative" ref={sortRef}>
+                                    <div className="relative" ref={sortRefTablet}>
                                         <button
                                             onClick={() => setIsSortOpen(!isSortOpen)}
                                             className="bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium flex items-center gap-2 hover:border-brand-lime transition-colors min-w-[160px] justify-between"
@@ -462,6 +469,7 @@ function ListingsContent() {
                                     setFilters={setFilters}
                                     handleFilterChange={handleFilterChange}
                                     toggleAmenity={toggleAmenity}
+                                    isSidebar={false}
                                 />
                             </div>
 

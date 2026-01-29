@@ -10,9 +10,10 @@ interface FilterContentProps {
     setFilters: React.Dispatch<React.SetStateAction<PropertyFilters>>;
     handleFilterChange: (key: keyof PropertyFilters, value: any) => void;
     toggleAmenity: (amenity: string) => void;
+    isSidebar?: boolean;
 }
 
-export default function FilterContent({ filters, setFilters, handleFilterChange, toggleAmenity }: FilterContentProps) {
+export default function FilterContent({ filters, setFilters, handleFilterChange, toggleAmenity, isSidebar = false }: FilterContentProps) {
     const [showAllAmenities, setShowAllAmenities] = useState(false);
 
     return (
@@ -139,8 +140,8 @@ export default function FilterContent({ filters, setFilters, handleFilterChange,
             {/* Amenities Checklist */}
             <div>
                 <label className="text-sm font-bold text-gray-500 mb-3 block">Amenities</label>
-                <div className="space-y-2">
-                    {(showAllAmenities ? MASTER_AMENITIES : MASTER_AMENITIES.slice(0, 5)).map((amenity) => (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-y-2 gap-x-4">
+                    {(isSidebar && !showAllAmenities ? MASTER_AMENITIES.slice(0, 5) : MASTER_AMENITIES).map((amenity) => (
                         <label
                             key={amenity.key}
                             className="flex items-center gap-3 cursor-pointer group"
@@ -161,10 +162,10 @@ export default function FilterContent({ filters, setFilters, handleFilterChange,
                             </span>
                         </label>
                     ))}
-                    {MASTER_AMENITIES.length > 5 && (
+                    {isSidebar && MASTER_AMENITIES.length > 5 && (
                         <button
                             onClick={() => setShowAllAmenities(!showAllAmenities)}
-                            className="text-sm font-bold text-brand-lime hover:underline mt-2"
+                            className="text-sm font-bold text-brand-lime hover:underline mt-2 col-span-full text-left"
                         >
                             {showAllAmenities ? 'Show less' : `Show more (+${MASTER_AMENITIES.length - 5})`}
                         </button>
