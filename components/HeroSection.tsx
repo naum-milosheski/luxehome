@@ -41,7 +41,7 @@ export default function HeroSection() {
                         <span className="text-gray-200 lg:text-gray-400">for</span> Living.
                     </h1>
 
-                    <p className="text-base sm:text-lg text-gray-100 lg:text-gray-500 max-w-xs sm:max-w-md leading-relaxed mb-8 lg:mb-12 mx-auto lg:mx-0 drop-shadow-sm lg:drop-shadow-none">
+                    <p className="text-base sm:text-lg text-white font-medium lg:text-gray-500 max-w-xs sm:max-w-md leading-relaxed mb-8 lg:mb-12 mx-auto lg:mx-0 drop-shadow-md lg:drop-shadow-none">
                         Curated real estate for those who seek architecture, not just square footage. Discover homes that inspire.
                     </p>
 
@@ -75,7 +75,7 @@ export default function HeroSection() {
             {/* Mobile: Absolute Background. Desktop: Relative Split Column */}
             <div className="absolute inset-0 lg:relative lg:inset-auto lg:w-[55%] h-full lg:h-auto z-0 order-1 lg:order-2 overflow-hidden">
                 {/* Mobile Overlay - Darkens image for text readability */}
-                <div className="absolute inset-0 bg-black/40 lg:hidden z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-black/80 lg:hidden z-10" />
 
                 <div className="absolute inset-0 bg-gray-200">
                     <Image
