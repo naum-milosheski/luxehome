@@ -1,7 +1,7 @@
 'use client';
 
 import AdminSidebar from '@/components/AdminSidebar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 
@@ -11,6 +11,18 @@ export default function AdminLayout({
     children: React.ReactNode;
 }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // Lock body scroll when mobile sidebar is open
+    useEffect(() => {
+        if (isSidebarOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
 
     return (
         <div className="min-h-screen bg-brand-bg">
