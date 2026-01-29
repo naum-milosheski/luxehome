@@ -23,7 +23,7 @@ export default function HeroSection() {
     };
 
     return (
-        <div className="relative w-full h-[80vh] lg:min-h-[85vh] lg:h-auto flex-none lg:flex lg:flex-row overflow-hidden bg-brand-bg">
+        <div className="relative w-full h-[100svh] lg:min-h-[85vh] lg:h-auto flex-none lg:flex lg:flex-row overflow-hidden bg-brand-bg">
 
             {/* LEFT SIDE: Editorial Typography & Search (45%) */}
             <div className="order-2 lg:order-1 lg:w-[45%] relative z-20 h-full lg:h-auto flex flex-col justify-center px-6 md:px-12 lg:pl-24 xl:pl-32 2xl:pl-44 items-center lg:items-start text-center lg:text-left">
