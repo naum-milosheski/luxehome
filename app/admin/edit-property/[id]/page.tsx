@@ -81,24 +81,24 @@ export default function EditPropertyPage({ params }: { params: { id: string } })
 
         // Auto-check amenities based on tags
         const newAmenities = { ...amenities };
-        const lowerTags = detectedTags.map(t => t.toLowerCase());
+        const lowerTags = detectedTags.map((t: string) => t.toLowerCase());
 
-        if (lowerTags.some(t => t.includes('pool') && t.includes('infinity'))) newAmenities.infinityPool = true;
-        else if (lowerTags.some(t => t.includes('pool'))) newAmenities.pool = true;
-        if (lowerTags.some(t => t.includes('gym') || t.includes('fitness'))) newAmenities.gym = true;
-        if (lowerTags.some(t => t.includes('ocean') || t.includes('sea') || t.includes('beach'))) newAmenities.oceanView = true;
-        if (lowerTags.some(t => t.includes('city'))) newAmenities.cityView = true;
-        if (lowerTags.some(t => t.includes('mountain'))) newAmenities.mountainView = true;
-        if (lowerTags.some(t => t.includes('parking') || t.includes('garage'))) newAmenities.parking = true;
-        if (lowerTags.some(t => t.includes('security') || t.includes('gated'))) newAmenities.security = true;
-        if (lowerTags.some(t => t.includes('wifi') || t.includes('internet'))) newAmenities.wifi = true;
-        if (lowerTags.some(t => t.includes('spa') || t.includes('hot tub'))) newAmenities.spa = true;
-        if (lowerTags.some(t => t.includes('sauna'))) newAmenities.sauna = true;
-        if (lowerTags.some(t => t.includes('theater') || t.includes('cinema'))) newAmenities.homeTheater = true;
-        if (lowerTags.some(t => t.includes('wine'))) newAmenities.wineCellar = true;
-        if (lowerTags.some(t => t.includes('smart home') || t.includes('automation'))) newAmenities.smartHome = true;
-        if (lowerTags.some(t => t.includes('fireplace'))) newAmenities.fireplace = true;
-        if (lowerTags.some(t => t.includes('elevator') || t.includes('lift'))) newAmenities.elevator = true;
+        if (lowerTags.some((t: string) => t.includes('pool') && t.includes('infinity'))) newAmenities.infinityPool = true;
+        else if (lowerTags.some((t: string) => t.includes('pool'))) newAmenities.pool = true;
+        if (lowerTags.some((t: string) => t.includes('gym') || t.includes('fitness'))) newAmenities.gym = true;
+        if (lowerTags.some((t: string) => t.includes('ocean') || t.includes('sea') || t.includes('beach'))) newAmenities.oceanView = true;
+        if (lowerTags.some((t: string) => t.includes('city'))) newAmenities.cityView = true;
+        if (lowerTags.some((t: string) => t.includes('mountain'))) newAmenities.mountainView = true;
+        if (lowerTags.some((t: string) => t.includes('parking') || t.includes('garage'))) newAmenities.parking = true;
+        if (lowerTags.some((t: string) => t.includes('security') || t.includes('gated'))) newAmenities.security = true;
+        if (lowerTags.some((t: string) => t.includes('wifi') || t.includes('internet'))) newAmenities.wifi = true;
+        if (lowerTags.some((t: string) => t.includes('spa') || t.includes('hot tub'))) newAmenities.spa = true;
+        if (lowerTags.some((t: string) => t.includes('sauna'))) newAmenities.sauna = true;
+        if (lowerTags.some((t: string) => t.includes('theater') || t.includes('cinema'))) newAmenities.homeTheater = true;
+        if (lowerTags.some((t: string) => t.includes('wine'))) newAmenities.wineCellar = true;
+        if (lowerTags.some((t: string) => t.includes('smart home') || t.includes('automation'))) newAmenities.smartHome = true;
+        if (lowerTags.some((t: string) => t.includes('fireplace'))) newAmenities.fireplace = true;
+        if (lowerTags.some((t: string) => t.includes('elevator') || t.includes('lift'))) newAmenities.elevator = true;
 
         setAmenities(newAmenities);
         setIsAnalyzing(false);
@@ -107,15 +107,13 @@ export default function EditPropertyPage({ params }: { params: { id: string } })
     const handleGenerateDescription = async () => {
         setIsGenerating(true);
         const activeAmenities = Object.keys(amenities).filter(k => amenities[k as keyof typeof amenities]);
-        const details = `
-            Type: ${propertyType}
-            Title: ${title}
-            Location: ${address}
-            Stats: ${beds} beds, ${baths} baths, ${sqft} sqft
-            Key Features: ${tags.join(', ')}
-            Amenities: ${activeAmenities.join(', ')}
-        `;
-        const generatedText = await generateDescription(details);
+        const generatedText = await generateDescription({
+            title,
+            location: address,
+            stats: `${beds} beds, ${baths} baths, ${sqft} sqft`,
+            features: tags,
+            amenities: activeAmenities
+        });
         setDescription(generatedText);
         setIsGenerating(false);
     };
