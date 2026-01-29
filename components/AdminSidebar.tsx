@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, PlusCircle, Users, Settings, LogOut, Package } from 'lucide-react';
+import { LayoutDashboard, PlusCircle, Users, Settings, LogOut, Package, X } from 'lucide-react';
 import clsx from 'clsx';
 import { signOut } from '@/lib/auth';
 
@@ -35,20 +35,28 @@ export default function AdminSidebar({ isOpen = false, onClose }: AdminSidebarPr
 
             <aside
                 className={clsx(
-                    "w-64 bg-brand-card border-r border-gray-100 h-screen fixed left-0 top-0 flex flex-col z-50 transition-transform duration-300 md:translate-x-0",
+                    "w-72 bg-brand-card border-r border-gray-100 h-screen fixed left-0 top-0 flex flex-col z-50 transition-transform duration-300 md:translate-x-0",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                <div className="p-8 flex items-center justify-between">
+                <div className="p-6 flex items-center justify-between w-full">
                     <div>
                         <Link href="/" className="text-2xl font-bold tracking-tight text-brand-dark">
                             LuxeHome<span className="text-brand-lime">.</span>
                         </Link>
                         <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-bold">Admin Panel</p>
                     </div>
+                    {/* Close button for mobile/tablet */}
+                    <button
+                        onClick={onClose}
+                        className="md:hidden p-2 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-brand-dark transition-colors -mr-2"
+                        aria-label="Close menu"
+                    >
+                        <X size={24} />
+                    </button>
                 </div>
 
-                <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
+                <nav className="flex-1 px-4 space-y-2">
                     {navItems.map((item) => {
                         // Normalize pathname (remove trailing slash)
                         const normalizedPathname = pathname?.endsWith('/') && pathname !== '/'
