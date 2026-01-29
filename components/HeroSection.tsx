@@ -33,7 +33,7 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
                     <span className="inline-block py-1 px-3 rounded-full border border-white/30 lg:border-brand-dark/20 text-white lg:text-brand-dark/60 text-xs font-bold tracking-widest uppercase mb-6 lg:mb-8 bg-black/20 lg:bg-transparent backdrop-blur-sm lg:backdrop-blur-none">
-                        The Portfolio Collection
+                        Exclusive Residences
                     </span>
 
                     <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-white lg:text-brand-dark leading-[0.95] tracking-tight mb-6 lg:mb-8 drop-shadow-md lg:drop-shadow-none">
