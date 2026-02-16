@@ -35,7 +35,7 @@ export default function AdminSidebar({ isOpen = false, onClose }: AdminSidebarPr
 
             <aside
                 className={clsx(
-                    "w-72 bg-brand-card border-r border-gray-100 h-[100svh] fixed left-0 top-0 flex flex-col z-50 transition-transform duration-300 md:translate-x-0 overflow-hidden",
+                    "w-64 bg-brand-card border-r border-gray-100 h-[100svh] fixed left-0 top-0 flex flex-col z-50 transition-transform duration-300 md:translate-x-0 overflow-hidden",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
